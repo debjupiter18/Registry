@@ -1,0 +1,38 @@
+# ===================================================================
+# Spring Cloud Config bootstrap configuration for the "dev" profile
+# In prod profile, properties will be overwritten by the ones defined in bootstrap-prod.yml
+# ===================================================================
+
+spring:
+  application:
+    name: jhipster-registry
+  profiles:
+    active: dev
+    include: composite
+  cloud:
+    config:
+      server:
+        #git:
+         # uri: https://github.com/debjupiter18/central-config-server
+          #skipSslValidation: true
+        bootstrap: true
+        composite:
+          - type: native #git
+            #uri: https://github.com/debjupiter18/central-config-server
+
+            #searchPaths: {'application.yml'}
+            #private-key :
+            search-locations: file:/C:/Jhipster_Eureka/jhipster-registry-master/central-config/
+            #C:/Jhipster_Eureka/jhipster-registry-master/central-config
+                               #file:/home/something/central-config
+        prefix: /config
+      fail-fast: true
+      # name of the config server's property source (file.yml) that we want to use
+      name: jhipster-registry
+      profile: composite #,composite # profile(s) of the property source
+      label: master # toggle to switch to a different version of the configuration as stored in git
+      # it can be set to any label, branch or commit of the configuration source Git repository
+
+info:
+  project:
+    version: #project.version#
